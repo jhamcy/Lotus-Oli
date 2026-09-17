@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lotus & Oil — Sanctuary & Holistic Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --void: #0b120d;
+    --deep: #101c14;
+    --panel: rgba(243, 238, 224, 0.05);
+    --panel-hover: rgba(243, 238, 224, 0.09);
+    --panel-border: rgba(224, 201, 155, 0.16);
+    --hairline: rgba(224, 201, 155, 0.14);
+    --cream: #f4efe3;
+    --cream-muted: rgba(244, 239, 227, 0.62);
+    --cream-faint: rgba(244, 239, 227, 0.38);
+    --gold: #c9a869;
+    --gold-bright: #e6cd97;
+    --shadow-soft: 0 20px 50px rgba(3, 8, 5, 0.35);
+    --shadow-deep: 0 30px 80px rgba(3, 8, 5, 0.5);
+    --radius: 2px;
+    --radius-lg: 6px;
+    --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--void);
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(201, 168, 105, 0.10), transparent 32%),
+      radial-gradient(circle at 85% 78%, rgba(60, 110, 78, 0.22), transparent 38%),
+      linear-gradient(180deg, rgba(11, 18, 13, 0.88), rgba(11, 18, 13, 0.96)),
+      url("images/lotus-oil-blend-background.jpg");
+    background-position: center, center, center, center;
+    background-size: cover, cover, cover, cover;
+    background-attachment: fixed, fixed, fixed, fixed;
+    background-repeat: no-repeat;
+    color: var(--cream);
+    line-height: 1.7;
+    letter-spacing: -0.005em;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; margin: 0 0 0.4em; color: var(--cream); }
+
+  a { color: inherit; }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* Header */
+  header {
+    position: fixed;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+    width: 92%;
+    max-width: 1240px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 26px;
+    background: rgba(15, 24, 17, 0.62);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--panel-border);
+    border-radius: 100px;
+    box-shadow: 0 18px 40px rgba(2, 6, 4, 0.35);
+    transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  header.scrolled { background: rgba(11, 18, 13, 0.86); box-shadow: 0 18px 40px rgba(2, 6, 4, 0.5); }
+
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+
+  nav { display: flex; justify-content: center; gap: 30px; }
+  nav a {
+    text-decoration: none;
+    color: var(--cream-muted);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    transition: color 0.35s var(--ease);
+  }
+  nav a:hover { color: var(--gold-bright); }
+
+  .btn-reserve {
+    justify-self: end;
+    background: linear-gradient(135deg, var(--gold), #a9895a);
+    color: #17190f;
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    border: none;
+    cursor: pointer;
+  }
+  .btn-reserve:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(201, 168, 105, 0.3); }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 13px 32px;
+    border: 1px solid rgba(244, 239, 227, 0.4);
+    border-radius: 100px;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    transition: var(--ease) 0.4s;
+    backdrop-filter: blur(6px);
+  }
+  .btn-outline:hover { background: rgba(244, 239, 227, 0.1); border-color: var(--gold-bright); color: var(--gold-bright); }
+
+  /* ===== Hero Carousel ===== */
+  .hero-carousel {
+    position: relative;
+    height: 100vh;
+    min-height: 620px;
+    max-height: 980px;
+    width: 100%;
+    overflow: hidden;
+    background: #060a07;
+  }
+
+  .hc-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.4s var(--ease);
+    pointer-events: none;
+  }
+  .hc-slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
+
+  .hc-backdrop {
+    position: absolute;
+    inset: -3%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(38px) brightness(0.42) saturate(1.05);
+    transform: scale(1.08);
+  }
+
+  .hc-figure {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 108px 4% 96px;
+  }
+
+  .hc-figure img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-deep);
+    border: 1px solid rgba(244, 239, 227, 0.14);
+    animation: kenburns 9s var(--ease) forwards;
+  }
+  .hc-slide.active .hc-figure img { animation: kenburns 9s var(--ease) forwards; }
+
+  @keyframes kenburns {
+    from { transform: scale(1.015); }
+    to { transform: scale(1); }
+  }
+
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(6, 10, 7, 0.55) 0%, rgba(6, 10, 7, 0) 22%, rgba(6, 10, 7, 0) 64%, rgba(6, 10, 7, 0.7) 100%);
+  }
+
+  .hc-controls {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 34px;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+  .hc-dots { display: flex; gap: 10px; }
+  .hc-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(244, 239, 227, 0.35);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: var(--ease) 0.4s;
+  }
+  .hc-dot.active { background: var(--gold-bright); width: 26px; border-radius: 5px; }
+
+  .hc-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 6;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(244, 239, 227, 0.3);
+    background: rgba(11, 18, 13, 0.35);
+    backdrop-filter: blur(6px);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--ease) 0.35s;
+  }
+  .hc-arrow:hover { background: rgba(201, 168, 105, 0.25); border-color: var(--gold-bright); }
+  .hc-arrow.prev { left: 22px; }
+  .hc-arrow.next { right: 22px; }
+  .hc-arrow svg { width: 16px; height: 16px; }
+
+  .hero-cta-row {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    bottom: 96px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    top: 28px;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--cream-faint);
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Feature bar */
+  .feature-bar {
+    position: relative;
+    z-index: 5;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: 34px 8%;
+    background: rgba(16, 28, 20, 0.55);
+    backdrop-filter: blur(14px);
+  }
+  .feature-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+  }
+  .feature-item h4 { font-size: 1.05rem; margin-bottom: 6px; font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0.2px; }
+  .feature-item p { font-size: 0.75rem; color: var(--cream-faint); margin: 0; text-transform: uppercase; letter-spacing: 1.4px; }
+
+  /* Section shells */
+  .section-title-wrap { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+  .section-title-wrap h2 { font-size: clamp(2.3rem, 4vw, 3.1rem); }
+  .section-title-wrap p { color: var(--cream-muted); font-weight: 300; font-size: 1rem; }
+
+  .services-section { padding: 130px 8% 90px; max-width: 1400px; margin: 0 auto; }
+
+  .category-title {
+    font-size: 1.9rem;
+    margin: 74px 0 32px;
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+  }
+  .category-title:first-of-type { margin-top: 0; }
+  .category-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0.5;
+  }
+
+  .treatment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .treatment-card {
+    background: var(--panel);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--ease) 0.5s;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--panel-border);
+  }
+  .treatment-card:hover { background: var(--panel-hover); transform: translateY(-6px); border-color: rgba(224, 201, 155, 0.35); }
+
+  .card-img-box { width: 100%; height: 220px; overflow: hidden; background: #0e1912; }
+  .card-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .treatment-card:hover .card-img-box img { transform: scale(1.06); }
+
+  .card-content { padding: 26px 28px 28px; display: flex; flex-direction: column; flex-grow: 1; }
+  .card-content h3 { font-size: 1.32rem; margin-bottom: 10px; }
+  .card-content p { color: var(--cream-muted); font-size: 0.86rem; font-weight: 300; margin-bottom: 22px; flex-grow: 1; }
+
+  .card-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--hairline); }
+  .price { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold-bright); }
+  .duration { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream-faint); font-weight: 600; }
+
+  /* Sanctuary showcase (the two branded menu panels) */
+  .showcase-section { padding: 110px 8%; background: rgba(16, 28, 20, 0.45); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .showcase-grid { max-width: 1240px; margin: 60px auto 0; display: flex; flex-direction: column; gap: 40px; }
+  .showcase-panel {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--panel-border);
+    box-shadow: var(--shadow-soft);
+  }
+  .showcase-panel img { display: block; width: 100%; height: auto; transition: transform 1.2s var(--ease); }
+  .showcase-panel:hover img { transform: scale(1.015); }
+
+  /* Editorial Quote */
+  .quote-section { padding: 130px 8%; text-align: center; max-width: 900px; margin: 0 auto; }
+  .quote-box { background: var(--panel); backdrop-filter: blur(14px); padding: 60px 44px; border-radius: var(--radius-lg); border: 1px solid var(--panel-border); box-shadow: var(--shadow-soft); }
+  .quote-mark { font-family: 'Playfair Display', serif; font-size: 3.6rem; color: var(--gold); line-height: 0; display: block; margin-bottom: 20px; }
+  .quote-body { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-style: italic; margin-bottom: 22px; line-height: 1.4; color: var(--cream); }
+  .quote-author { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-faint); font-weight: 500; }
+
+  /* Footer */
+  footer { position: relative; z-index: 5; border-top: 1px solid var(--hairline); padding: 90px 8% 40px; background: rgba(9, 14, 10, 0.75); backdrop-filter: blur(16px); }
+  .footer-grid { max-width: 1200px; margin: 0 auto 70px; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; }
+  .footer-col h4 { font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; font-weight: 600; }
+  .footer-brand { display: flex; align-items: flex-start; gap: 12px; }
+  .footer-brand svg { width: 26px; height: 26px; flex-shrink: 0; margin-top: 4px; }
+  .footer-brand h3 { font-size: 1.6rem; margin-bottom: 14px; }
+  .footer-brand p { color: var(--cream-muted); font-size: 0.88rem; font-weight: 300; max-width: 280px; margin: 0; }
+  .footer-links { list-style: none; padding: 0; margin: 0; }
+  .footer-links li { margin-bottom: 12px; }
+  .footer-links a { text-decoration: none; color: var(--cream-muted); font-size: 0.88rem; font-weight: 300; transition: color 0.35s var(--ease); }
+  .footer-links a:hover { color: var(--gold-bright); }
+  .footer-info-p { color: var(--cream-muted); font-size: 0.88rem; font-weight: 300; margin: 0 0 10px; }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--cream-faint); }
+  .legal-links { display: flex; gap: 20px; }
+  .legal-links a { color: var(--cream-faint); text-decoration: none; transition: color 0.35s var(--ease); }
+  .legal-links a:hover { color: var(--gold-bright); }
+
+  @media (min-width: 760px) {
+    .showcase-grid { flex-direction: row; align-items: flex-start; }
+    .showcase-panel { flex: 1; }
+  }
+
+  @media (max-width: 960px) {
+    header { grid-template-columns: auto auto; justify-content: space-between; top: 14px; width: 94%; padding: 12px 18px; }
+    nav { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .hc-figure { padding: 100px 5% 90px; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-carousel { height: 92vh; min-height: 560px; }
+    .hero-cta-row { bottom: 72px; flex-direction: column; align-items: center; }
+    .hc-arrow { width: 38px; height: 38px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+    .treatment-grid { grid-template-columns: 1fr; }
+    .card-img-box { height: auto; aspect-ratio: 4 / 3; }
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Floating Navbar -->
+  <header id="siteHeader">
+    <a href="#" class="logo">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 6C24 6 30 16 24 26C18 16 24 6 24 6Z" stroke="#c9a869" stroke-width="1.3"/>
+        <path d="M24 26C24 26 10 24 6 15C16 12 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+        <path d="M24 26C24 26 38 24 42 15C32 12 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+        <path d="M24 26C24 26 14 34 15 42C24 40 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+        <path d="M24 26C24 26 34 34 33 42C24 40 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+      </svg>
+      <span class="logo-text">Lotus &amp; Oil</span>
+    </a>
+    <nav>
+      <a href="#massages">Massages</a>
+      <a href="#facials">Facials</a>
+      <a href="#body">Body Work</a>
+      <a href="#thermal">Hydrotherapy</a>
+      <a href="#sanctuary">Sanctuary</a>
+    </nav>
+    <a href="#reserve" class="btn-reserve">Reserve</a>
+  </header>
+
+  <!-- Hero Carousel -->
+  <section class="hero-carousel" id="hcCarousel">
+
+    <div class="hc-slide active" data-index="0">
+      <div class="hc-backdrop" style="background-image:url('images/lotus-sanctuary-hero.png');"></div>
+      <div class="hc-figure"><img src="images/lotus-sanctuary-hero.png" alt="Lotus & Oil — Welcome to the Sanctuary"></div>
+    </div>
+
+    <div class="hc-slide" data-index="1">
+      <div class="hc-backdrop" style="background-image:url('images/sanctuary-treatment-suite.png');"></div>
+      <div class="hc-figure"><img src="images/sanctuary-treatment-suite.png" alt="Sanctuary Treatment Menu"></div>
+    </div>
+
+    <div class="hc-slide" data-index="2">
+      <div class="hc-backdrop" style="background-image:url('images/sanctuary-relaxation-lounge.png');"></div>
+      <div class="hc-figure"><img src="images/sanctuary-relaxation-lounge.png" alt="Sanctuary Relaxation Lounge Menu"></div>
+    </div>
+
+    <div class="hero-vignette"></div>
+    <div class="scroll-cue">Scroll to Explore</div>
+
+    <div class="hero-cta-row">
+      <a href="#massages" class="btn-reserve">Explore Menu</a>
+      <a href="#reserve" class="btn-outline">Reserve a Ritual</a>
+    </div>
+
+    <button class="hc-arrow prev" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button class="hc-arrow next" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <div class="hc-controls">
+      <div class="hc-dots" id="hcDots"></div>
+    </div>
+
+  </section>
+
+  <!-- Feature Bar -->
+  <div class="feature-bar">
+    <div class="feature-grid">
+      <div class="feature-item"><h4>Organic Essences</h4><p>100% Cold-Pressed</p></div>
+      <div class="feature-item"><h4>Master Therapists</h4><p>Bespoke Techniques</p></div>
+      <div class="feature-item"><h4>Private Suites</h4><p>Acoustic Isolation</p></div>
+    </div>
+  </div>
+
+  <!-- Expanded Service Menu Section -->
+  <section class="services-section">
+    <div class="section-title-wrap reveal">
+      <h2>The Service Menu</h2>
+      <p>Every session includes a sensory aroma ritual, hot herbal compresses, and private post-treatment tea tasting.</p>
+    </div>
+
+    <!-- 1. MASSAGE THERAPIES -->
+    <h3 class="category-title reveal" id="massages">Massage Therapies</h3>
+    <div class="treatment-grid">
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/lotus-signature-flow.png" alt="Lotus Signature Massage" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Lotus Signature Flow</h3>
+          <p>Full-body rhythmic therapy utilizing warm lotus-infused seed oil to restore fluid energy dynamics and melt chronic fatigue.</p>
+          <div class="card-meta"><span class="price">₱3,800</span><span class="duration">60 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/deep-kinetic-release.png" alt="Deep Kinetic Bodywork" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Deep Kinetic Release</h3>
+          <p>Targeted deep-tissue manipulation combined with organic arnica and eucalyptus essences for muscular alignment.</p>
+          <div class="card-meta"><span class="price">₱4,600</span><span class="duration">75 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/warm-basalt-thermal.png" alt="Warm Basalt Ritual" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Warm Basalt Thermal</h3>
+          <p>Volcanic stones radiate soft heat into deep muscle layers, complemented by cedarwood and bergamot aromatherapy.</p>
+          <div class="card-meta"><span class="price">₱5,200</span><span class="duration">90 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/acoustic-sound-resonance.png" alt="Acoustic Sound Resonance" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Acoustic Sound Resonance</h3>
+          <p>Tibetan singing bowl vibrations combined with gentle spinal presswork to induce deep meditative theta states.</p>
+          <div class="card-meta"><span class="price">₱4,800</span><span class="duration">75 Mins</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. FACIAL RITUALS -->
+    <h3 class="category-title reveal" id="facials">Facial Rituals</h3>
+    <div class="treatment-grid">
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/blue-tansy-sculpting.png" alt="Blue Tansy Radiance Facial" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Blue Tansy Sculpting</h3>
+          <p>Manual lymphatic facial massage incorporating cold-pressed rosehip and blue tansy oils to restore youthful radiance.</p>
+          <div class="card-meta"><span class="price">₱3,900</span><span class="duration">60 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/jade-gua-sha-contour.png" alt="Jade Gua Sha Sculpting" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Jade Gua Sha Contour</h3>
+          <p>Ancient stone shaping techniques release jawline tension, encouraging natural collagen production and cellular drainage.</p>
+          <div class="card-meta"><span class="price">₱4,500</span><span class="duration">75 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/lotus-bio-enzyme-dew.png" alt="Lotus Bio-Enzyme Dew" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Lotus Bio-Enzyme Dew</h3>
+          <p>Gentle botanical exfoliation paired with an intensive hyaluronic infusion for immediate hydration and glow.</p>
+          <div class="card-meta"><span class="price">₱4,300</span><span class="duration">60 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/24k-gold-luminescence.png" alt="24K Gold Luminescence Facial" loading="lazy"></div>
+        <div class="card-content">
+          <h3>24K Gold Luminescence</h3>
+          <p>Ultra-luxurious treatment utilizing pure 24K gold foil and micro-current therapy to firm, lift, and brighten skin cells.</p>
+          <div class="card-meta"><span class="price">₱6,500</span><span class="duration">90 Mins</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. BODY & SKIN POLISHING -->
+    <h3 class="category-title reveal" id="body">Body Polishing &amp; Wraps</h3>
+    <div class="treatment-grid">
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/botanical-salt-pearl-scrub.png" alt="Botanical Salt Exfoliation" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Botanical Salt &amp; Pearl Scrub</h3>
+          <p>Mineral-rich Pink Himalayan salts crushed with freshwater pearl powder and sweet almond oil to polish dull skin texture.</p>
+          <div class="card-meta"><span class="price">₱3,600</span><span class="duration">45 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/wild-thanaka-honey-cocoon.png" alt="Wild Thanaka Wrap" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Wild Thanaka &amp; Honey Cocoon</h3>
+          <p>Nourishing bark paste wrap blended with raw wildflower honey and warm coconut milk to deeply repair sun-exposed skin.</p>
+          <div class="card-meta"><span class="price">₱4,200</span><span class="duration">60 Mins</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. HYDROTHERAPY & THERMAL -->
+    <h3 class="category-title reveal" id="thermal">Hydrotherapy &amp; Thermal</h3>
+    <div class="treatment-grid">
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/mineral-herbal-soaking-bath.png" alt="Mineral Bath Ritual" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Mineral Herbal Soaking Bath</h3>
+          <p>Private carved stone bath infused with magnesium salts, dried lotus petals, and fresh botanical hydrosols.</p>
+          <div class="card-meta"><span class="price">₱2,800</span><span class="duration">45 Mins</span></div>
+        </div>
+      </div>
+      <div class="treatment-card reveal">
+        <div class="card-img-box"><img src="images/infrared-steam-detox-sauna.png" alt="Infrared Herbal Steam" loading="lazy"></div>
+        <div class="card-content">
+          <h3>Infrared Steam &amp; Detox Sauna</h3>
+          <p>Deep-penetrating infrared therapy paired with steam infused with lemongrass, eucalyptus, and organic ginger root.</p>
+          <div class="card-meta"><span class="price">₱3,200</span><span class="duration">45 Mins</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sanctuary Showcase -->
+  <section class="showcase-section" id="sanctuary">
+    <div class="section-title-wrap reveal">
+      <h2>The Sanctuary Awaits</h2>
+      <p>Every ritual and every room, curated for rejuvenation, restoration, and reconnection.</p>
+    </div>
+    <div class="showcase-grid">
+      <div class="showcase-panel reveal">
+        <img src="images/sanctuary-treatment-suite.png" alt="Sanctuary Treatment Menu" loading="lazy">
+      </div>
+      <div class="showcase-panel reveal">
+        <img src="images/sanctuary-relaxation-lounge.png" alt="Sanctuary Relaxation Lounge Menu" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Quote -->
+  <section class="quote-section">
+    <div class="quote-box reveal">
+      <span class="quote-mark">"</span>
+      <div class="quote-body">"Lotus &amp; Oil reimagines modern wellness. It is a quiet oasis where craftsmanship and pure botanical science seamlessly converge."</div>
+      <div class="quote-author">— Vogue Living Wellness Review</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="reserve">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 6C24 6 30 16 24 26C18 16 24 6 24 6Z" stroke="#c9a869" stroke-width="1.3"/>
+          <path d="M24 26C24 26 10 24 6 15C16 12 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+          <path d="M24 26C24 26 38 24 42 15C32 12 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+          <path d="M24 26C24 26 14 34 15 42C24 40 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+          <path d="M24 26C24 26 34 34 33 42C24 40 24 26 24 26Z" stroke="#c9a869" stroke-width="1.3"/>
+        </svg>
+        <div>
+          <h3>Lotus &amp; Oil</h3>
+          <p>A quiet urban refuge combining holistic kinetic bodywork with organic botanical essences.</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul class="footer-links">
+          <li><a href="#massages">Massage Rituals</a></li>
+          <li><a href="#facials">Facial Sculpting</a></li>
+          <li><a href="#body">Body Polishing</a></li>
+          <li><a href="#thermal">Hydrotherapy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sanctuary Hours</h4>
+        <p class="footer-info-p"><strong>Mon – Fri:</strong><br>10:00 AM – 10:00 PM</p>
+        <p class="footer-info-p"><strong>Sat – Sun:</strong><br>09:00 AM – 11:00 PM</p>
+      </div>
+      <div class="footer-col">
+        <h4>Concierge</h4>
+        <p class="footer-info-p">5th Avenue Corner 28th Street<br>Bonifacio Global City, Manila</p>
+        <p class="footer-info-p">concierge@lotusandoil.com</p>
+        <p class="footer-info-p">+63 (2) 8812 3456</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lotus &amp; Oil Sanctuary. All rights reserved.</span>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    document.addEventListener("DOMContentLoaded", function () {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+      // Header background on scroll
+      const header = document.getElementById("siteHeader");
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 40);
+      });
+
+      // Hero carousel
+      const slides = Array.from(document.querySelectorAll(".hc-slide"));
+      const dotsWrap = document.getElementById("hcDots");
+      const prevBtn = document.querySelector(".hc-arrow.prev");
+      const nextBtn = document.querySelector(".hc-arrow.next");
+      let current = 0;
+      let timer;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className = "hc-dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+        dot.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function goTo(index) {
+        slides[current].classList.remove("active");
+        dots[current].classList.remove("active");
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add("active");
+        dots[current].classList.add("active");
+        restart();
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(next, 6000);
+      }
+
+      nextBtn.addEventListener("click", next);
+      prevBtn.addEventListener("click", prev);
+
+      const carousel = document.getElementById("hcCarousel");
+      carousel.addEventListener("mouseenter", () => clearInterval(timer));
+      carousel.addEventListener("mouseleave", restart);
+
+      restart();
+    });
+  </script>
+
+</body>
+</html>
